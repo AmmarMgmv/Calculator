@@ -13,6 +13,7 @@ public class AppTest {
 		Calculator testA = new Calculator("1+1");
 		assertEquals(2, testA.Calculate);
 		
+		
 	}
 	
-}
+} 
