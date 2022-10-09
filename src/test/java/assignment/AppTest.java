@@ -43,6 +43,22 @@ public class AppTest {
 		App testK = new App();
 		assertEquals(4, testK.calculate("1+2*1+1"));
 		
+		App testL = new App();
+		assertEquals(-11015, testL.calculate("12435-2345*10"));
+		
+		App testM = new App();
+		assertEquals(1, testM.calculate("2-1"));
+		
+		App testN = new App();
+		assertEquals(0, testN.calculate("3-2-1"));
+		
+		App testO = new App();
+		assertEquals(-85219, testO.calculate("1256-86475"));
+		
+		App testP = new App();
+		assertEquals(-76396, testP.calculate("12435+34569-12345*10+50"));
+
+		
 	}
 	
 } 
