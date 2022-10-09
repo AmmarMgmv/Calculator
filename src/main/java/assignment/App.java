@@ -14,7 +14,7 @@ public class App
     }
 
     public static int calculate(String input) {
-    int result = 0;
+        int result = 0;
 
         if (validInput(input)) {
             String postfix = convertToPostfix(input);
@@ -27,6 +27,24 @@ public class App
     }
 
     public static boolean validInput (String input){
+        if(!(Character.isDigit(input.charAt(0)))){
+            return false;
+        }
+
+        boolean lastOperand = true;
+
+        for (int i = 0; i < input.length(); i++){
+            while(Character.isDigit(input.charAt(i))){
+                i++;
+                lastOperand = true;
+            }
+            if((input.charAt(i) == '*' || input.charAt(i) == '+' || input.charAt(i) == '-' ) && lastOperand){
+                lastOperand = false;
+            }
+            else{
+                return false;
+            }
+        }
         return true;
     }
 
