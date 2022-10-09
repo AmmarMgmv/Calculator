@@ -31,15 +31,15 @@ public class App
             return false;
         }
 
-        boolean lastOperand = true;
+        boolean lastOperator = true;
 
         for (int i = 0; i < input.length(); i++){
             while(Character.isDigit(input.charAt(i))){
                 i++;
-                lastOperand = true;
+                lastOperator = true;
             }
-            if((input.charAt(i) == '*' || input.charAt(i) == '+' || input.charAt(i) == '-' ) && lastOperand){
-                lastOperand = false;
+            if((input.charAt(i) == '*' || input.charAt(i) == '+' || input.charAt(i) == '-' ) && lastOperator){
+                lastOperator = false;
             }
             else{
                 return false;
@@ -49,7 +49,39 @@ public class App
     }
 
     public static String convertToPostfix(String input){
-        return input;
+        Stack <Character> operators = new Stack <Character> ();
+        StringBuilder postfixExpression = new StringBuilder();
+
+        for (int i = 0; i < input.length(); i++){
+            if(Character.isDigit(input.charAt(i))){
+                postfixExpression.append(input.charAt(i));
+            }
+            else if(input.charAt(i) == '*' || input.charAt(i) == '+' || input.charAt(i) == '-' ) {
+                postfixExpression.append(' ');
+                while(!operators.isEmpty() && hasPrecedence(input.charAt(i), operators.peek())){
+                    char popped = operators.pop();
+
+                    //potential error
+                    postfixExpression.append(popped + ' ');
+                }
+                operators.push(input.charAt(i));
+            }
+        }
+        postfixExpression.append(' ');
+        while (!operators.isEmpty()) {
+            postfixExpression.append(operators.pop());
+            postfixExpression.append(' ');
+        }
+        return postfixExpression.toString();
+    }
+
+    public static boolean hasPrecedence(char op1, char op2) {
+        if ((op1 == '*') && (op2 == '+' || op2 == '-')) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     public static int evaluateExpression(String input){
