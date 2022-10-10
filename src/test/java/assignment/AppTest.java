@@ -77,5 +77,44 @@ public class AppTest {
 		assertEquals("This is not a valid expression. A valid input contains only integers and operands such as +, - and *", testV.calculate("gs1531-fglkne234524+hyug*134234*bhisb1717"));
 		
 	}
-	
+
+	@Test
+	public void testingValidInput() {
+		boolean input1 = App.validInput("12+423-413");
+		assertEquals(true, input1);
+
+		boolean input2 = App.validInput("123++62-test");
+		assertEquals(false, input2);
+	}
+
+	@Test
+	public void testingConvertToPostfix() {
+		String input1 = App.convertToPostfix("12+423-413");
+		String expected1 = "12 423 + 413 - ";
+		assertEquals(expected1, input1);
+
+		String input2 = App.convertToPostfix("12+423*413-7");
+		String expected2 = "12 423 413 * + 7 - ";
+		assertEquals(expected2, input2);
+	}
+
+	@Test
+	public void testingPrecedence() {
+		boolean precedence1 = App.hasPrecedence('*', '-');
+		assertEquals(false, precedence1);
+
+		boolean precedence2 = App.hasPrecedence('+', '*');
+		assertEquals(true, precedence2);
+	}
+
+	@Test
+	public void testingEvaluateExpression() {
+		String input1 = App.evaluateExpression("12 423 + 413 - ");
+		String expected1 = "22";
+		assertEquals(expected1, input1);
+
+		String input2 = App.evaluateExpression("12 423 413 * + 7 - ");
+		String expected2 = "174704";
+		assertEquals(expected2, input2);
+	}
 } 
