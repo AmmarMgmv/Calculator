@@ -29,7 +29,7 @@ public class AppTest {
 		assertEquals(6, testF.calculate("1*2*3"));
 		
 		App testG = new App();
-		assertEquals(2142, testG.calculate("52*42"));
+		assertEquals(2184, testG.calculate("52*42"));
 		
 		App testH = new App();
 		assertEquals(87972792, testH.calculate("1643*552*97"));

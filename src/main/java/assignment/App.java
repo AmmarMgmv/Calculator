@@ -17,8 +17,8 @@ public class App
         int result = 0;
 
         if (validInput(input)) {
-            String postfix = convertToPostfix(input);
-            result = evaluateExpression(input);
+            String postfix= convertToPostfix(input);
+            result = evaluateExpression(postfix);
         } else {
             System.out.println("This is not a valid expression. A valid input contains only integers and operands such as +, - and *");
         }
@@ -27,29 +27,33 @@ public class App
     }
 
     public static boolean validInput (String input){
-        if(!(Character.isDigit(input.charAt(0)))){
+        if(!Character.isDigit(input.charAt(0))){
             return false;
         }
+        else {
+            boolean lastOperator = false;
 
-        boolean lastOperator = true;
-
-        for (int i = 0; i < input.length(); i++){
-            while(Character.isDigit(input.charAt(i))){
-                i++;
-                lastOperator = true;
+            for (int i = 0; i < input.length()-1; i++) {
+                while ((Character.isDigit(input.charAt(i))) && (i < input.length()-1)) {
+                    i++;
+                    lastOperator = false;
+                }
+                if ((input.charAt(i) == '*' || input.charAt(i) == '+' || input.charAt(i) == '-') && !lastOperator) {
+                    lastOperator = true;
+                }
+                else if (Character.isDigit(input.charAt(i))) {
+                    return true;
+                }
+                else{
+                    return false;
+                }
             }
-            if((input.charAt(i) == '*' || input.charAt(i) == '+' || input.charAt(i) == '-' ) && lastOperator){
-                lastOperator = false;
-            }
-            else{
-                return false;
-            }
+            return true;
         }
-        return true;
     }
 
     public static String convertToPostfix(String input){
-        Stack <Character> operators = new Stack <Character> ();
+        Stack <Character> operators = new Stack <> ();
         StringBuilder postfixExpression = new StringBuilder();
 
         for (int i = 0; i < input.length(); i++){
@@ -84,11 +88,11 @@ public class App
     }
 
     public static int evaluateExpression(String input){
-        Stack <Integer> operands = new Stack <Integer> ();
-        StringBuilder multiDigitNumber = new StringBuilder();
+        Stack <Integer> operands = new Stack <> ();
 
         for (int i = 0; i < input.length(); i++){
             if(Character.isDigit(input.charAt(i))){
+                StringBuilder multiDigitNumber = new StringBuilder();
                 while(input.charAt(i) != ' '){
                     multiDigitNumber.append(input.charAt(i));
                     i++;
@@ -109,6 +113,7 @@ public class App
                 else if (input.charAt(i) == '-'){
                     result = secondNum - firstNum;
                 }
+                operands.push(result);
             }
         }
         return operands.pop();
