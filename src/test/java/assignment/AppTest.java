@@ -58,6 +58,23 @@ public class AppTest {
 		App testP = new App();
 		assertEquals("-76396", testP.calculate("12435+34569-12345*10+50"));
 
+		App testQ = new App();
+		assertEquals("59338", testQ.calculate("1027*62-7920+32*112"));
+		
+		App testR = new App();
+		assertEquals("409486", testR.calculate("234+552*1124-211244+48"));
+		
+		App testS = new App();
+		assertEquals("-279313620", testS.calculate("1947-1193833*234+41355"));
+		
+		App testT = new App();
+		assertEquals("79022959", testT.calculate("41433-234+55232*130*11"));
+		
+		App testU = new App();
+		assertEquals("This is not a valid expression. A valid input contains only integers and operands such as +, - and *", testU.calculate("134gw-234234+234i*nsjdn8"));
+		
+		App testV = new App();
+		assertEquals("This is not a valid expression. A valid input contains only integers and operands such as +, - and *", testV.calculate("gs1531-fglkne234524+hyug*134234*bhisb1717"));
 		
 	}
 	
