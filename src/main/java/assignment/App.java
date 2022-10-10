@@ -10,11 +10,11 @@ public class App
         Scanner input = new Scanner(System.in);
         System.out.println("Enter the string you want to be evaluated: ");
         String expression = input.nextLine();
-        calculate(expression);
+        System.out.println("The answer is: " + calculate(expression));
     }
 
-    public static int calculate(String input) {
-        int result = 0;
+    public static String calculate(String input) {
+        String result = null;
 
         if (validInput(input)) {
             String postfix= convertToPostfix(input);
@@ -87,7 +87,7 @@ public class App
         }
     }
 
-    public static int evaluateExpression(String input){
+    public static String evaluateExpression(String input){
         Stack <Integer> operands = new Stack <> ();
 
         for (int i = 0; i < input.length(); i++){
@@ -116,6 +116,6 @@ public class App
                 operands.push(result);
             }
         }
-        return operands.pop();
+        return Integer.toString(operands.pop());
     }
 }
