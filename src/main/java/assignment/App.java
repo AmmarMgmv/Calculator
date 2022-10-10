@@ -15,14 +15,12 @@ public class App
 
     public static String calculate(String input) {
         String result = null;
-
         if (validInput(input)) {
             String postfix= convertToPostfix(input);
             result = evaluateExpression(postfix);
         } else {
-            System.out.println("This is not a valid expression. A valid input contains only integers and operands such as +, - and *");
+            result = "This is not a valid expression. A valid input contains only integers and operands such as +, - and *";
         }
-
         return result;
     }
 
