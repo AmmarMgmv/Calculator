@@ -85,6 +85,33 @@ public class App
     }
 
     public static int evaluateExpression(String input){
-        return 0;
+        Stack <Integer> operands = new Stack <Integer> ();
+        StringBuilder multiDigitNumber = new StringBuilder();
+
+        for (int i = 0; i < input.length(); i++){
+            if(Character.isDigit(input.charAt(i))){
+                while(input.charAt(i) != ' '){
+                    multiDigitNumber.append(input.charAt(i));
+                    i++;
+                }
+                operands.push(Integer.parseInt(multiDigitNumber.toString()));
+            }
+            else if (input.charAt(i) == '*' || input.charAt(i) == '+' || input.charAt(i) == '-' ){
+                int result = 0;
+                int firstNum = operands.pop();
+                int secondNum = operands.pop();
+
+                if(input.charAt(i) == '*'){
+                    result = firstNum * secondNum;
+                }
+                else if (input.charAt(i) == '+'){
+                    result = firstNum + secondNum;
+                }
+                else if (input.charAt(i) == '-'){
+                    result = firstNum - secondNum;
+                }
+            }
+        }
+        return operands.pop();
     }
 }
