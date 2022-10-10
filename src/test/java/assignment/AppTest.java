@@ -80,15 +80,36 @@ public class AppTest {
 
 	@Test
 	public void testingValidInput() {
+		
 		boolean input1 = App.validInput("12+423-413");
 		assertEquals(true, input1);
 
 		boolean input2 = App.validInput("123++62-test");
 		assertEquals(false, input2);
+		
+		boolean input3 = App.validInput("4412*31290-1143211");
+		assertEquals(true, input3);
+
+		boolean input4 = App.validInput("-2342-1432+22");
+		assertEquals(false, input4);
+		
+		boolean input5 = App.validInput("24536*123231*2342");
+		assertEquals(true, input5);
+
+		boolean input6 = App.validInput("+1232++1434/testing");
+		assertEquals(false, input6);
+		
+		boolean input7 = App.validInput("11*111-111+111111");
+		assertEquals(true, input7);
+
+		boolean input8 = App.validInput("end");
+		assertEquals(false, input8);
+		
 	}
 
 	@Test
 	public void testingConvertToPostfix() {
+		
 		String input1 = App.convertToPostfix("12+423-413");
 		String expected1 = "12 423 + 413 - ";
 		assertEquals(expected1, input1);
@@ -96,6 +117,31 @@ public class AppTest {
 		String input2 = App.convertToPostfix("12+423*413-7");
 		String expected2 = "12 423 413 * + 7 - ";
 		assertEquals(expected2, input2);
+		
+		String input3 = App.convertToPostfix("11*111-111+111111");
+		String expected3 = "11 111 * 111 - 111111 + ";
+		assertEquals(expected3, input3);
+		
+		String input4 = App.convertToPostfix("4412*31290-1143211");
+		String expected4 = "4412 31290 * 1143211 - ";
+		assertEquals(expected4, input4);
+		
+		String input5 = App.convertToPostfix("12313*1414*1231*10043");
+		String expected5 = "12313 1414 * 1231 * 10043 * ";
+		assertEquals(expected5, input5);
+		
+		String input6 = App.convertToPostfix("142-4133+214*4132");
+		String expected6 = "142 4133 - 214 4132 * + ";
+		assertEquals(expected6, input6);
+		
+		String input7 = App.convertToPostfix("8852-1198224+1898928*1983");
+		String expected7 = "8852 1198224 - 1898928 1983 * + ";
+		assertEquals(expected7, input7);
+		
+		String input8 = App.convertToPostfix("979983-1123*1111+1434344");
+		String expected8 = "979983 1123 1111 * - 1434344 + ";
+		assertEquals(expected8, input8);
+		
 	}
 
 	@Test
